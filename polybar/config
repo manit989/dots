@@ -1,0 +1,216 @@
+;==========================================================
+;
+;   Polybar Config - Catppuccin Mocha "Waybar Pill" Style
+;
+;==========================================================
+
+[colors]
+; Catppuccin Mocha Palette
+base = #1e1e2e
+mantle = #181825
+crust = #11111b
+text = #cdd6f4
+subtext0 = #a6adc8
+surface0 = #313244
+surface1 = #45475a
+surface2 = #585b70
+
+blue = #89b4fa
+mauve = #cba6f7
+green = #a6e3a1
+red = #f38ba8
+
+transparent = #00000000
+
+[bar/main]
+monitor = ${env:MONITOR:}
+width = 100%
+height = 30
+radius = 0.0
+fixed-center = true
+bottom = false
+line-size = 0
+enable-ipc = true
+
+; Transparent background to allow "pills" to float
+background = ${colors.transparent}
+foreground = ${colors.text}
+
+; Add a little top padding so the bar doesn't hug the absolute edge
+border-top-size = 14
+border-left-size = 10
+border-right-size = 10
+border-bottom-size = 14
+border-color = ${colors.transparent}
+
+padding-left = 0
+padding-right = 0
+module-margin = 0
+
+; Font 1: Main Text (1-indexed in Polybar tags as %{T1})
+font-0 = "JetBrainsMono Nerd Font Propo:style=Medium:pixelsize=13;3"
+; Font 2: Half-circles for the pill effect (%{T2})
+font-1 = "JetBrainsMono Nerd Font Propo:style=Regular:pixelsize=18;4"
+; Font 3: Fallback for icons if needed
+font-2 = "Font Awesome 6 Free Solid:pixelsize=12;3"
+
+modules-left = i3
+modules-center = date
+modules-right = wlan space pulseaudio space battery
+
+wm-restack = i3
+cursor-click = pointer
+
+;==========================================================
+; MODULES
+;==========================================================
+
+[module/space]
+type = custom/text
+content = "  "
+content-background = ${colors.transparent}
+
+[module/i3]
+type = internal/i3
+pin-workspaces = true
+show-urgent = true
+strip-wsnumbers = true
+index-sort = true
+enable-click = true
+enable-scroll = false
+
+; label-focused = "%{T2}%{F#cdd6f4}%{F-}%{T-}%{B#cdd6f4}%{F#11111b} %name% %{B-}%{F-}%{T2}%{F#cdd6f4}%{F-}%{T-} "
+; label-unfocused = "%{T2}%{F#313244}%{F-}%{T-}%{B#313244}%{F#cdd6f4} %name% %{B-}%{F-}%{T2}%{F#313244}%{F-}%{T-} "
+; label-visible = ${self.label-unfocused}
+; label-urgent = "%{T2}%{F#f38ba8}%{F-}%{T-}%{B#f38ba8}%{F#11111b} %name% %{B-}%{F-}%{T2}%{F#f38ba8}%{F-}%{T-} "
+
+label-focused = "%{T2}%{F#cdd6f4}%{F-}%{T-}%{B#cdd6f4}%{F#11111b}  %name%  %{B-}%{F-}%{T2}%{F#cdd6f4}%{F-}%{T-} "
+label-unfocused = "%{T2}%{F#313244}%{F-}%{T-}%{B#313244}%{F#cdd6f4}%name%%{B-}%{F-}%{T2}%{F#313244}%{F-}%{T-} "
+label-visible = ${self.label-unfocused}
+label-urgent = "%{T2}%{F#f38ba8}%{F-}%{T-}%{B#f38ba8}%{F#11111b}%name%%{B-}%{F-}%{T2}%{F#f38ba8}%{F-}%{T-} "
+
+
+[module/wlan]
+type = internal/network
+interface-type = wireless
+interval = 3
+
+format-connected = <label-connected>
+format-connected-prefix = ""
+format-connected-prefix-font = 2
+format-connected-prefix-foreground = ${colors.blue}
+format-connected-prefix-background = ${colors.transparent}
+
+format-connected-suffix = ""
+format-connected-suffix-font = 2
+format-connected-suffix-foreground = ${colors.blue}
+format-connected-suffix-background = ${colors.transparent}
+
+; Notice the lack of leading/trailing spaces inside the label so it stays flush with the half-circles
+label-connected = "%essid% (%signal%%) 󰤨"
+label-connected-background = ${colors.blue}
+label-connected-foreground = ${colors.crust}
+
+format-disconnected = <label-disconnected>
+label-disconnected = ""
+
+[module/pulseaudio]
+type = internal/pulseaudio
+use-ui-max = false
+interval = 5
+
+format-volume = <label-volume>
+format-volume-prefix = ""
+format-volume-prefix-font = 2
+format-volume-prefix-foreground = ${colors.mauve}
+format-volume-prefix-background = ${colors.transparent}
+
+format-volume-suffix = ""
+format-volume-suffix-font = 2
+format-volume-suffix-foreground = ${colors.mauve}
+format-volume-suffix-background = ${colors.transparent}
+
+label-volume = "%percentage%% "
+label-volume-background = ${colors.mauve}
+label-volume-foreground = ${colors.crust}
+
+format-muted = <label-muted>
+format-muted-prefix = ""
+format-muted-prefix-font = 2
+format-muted-prefix-foreground = ${colors.surface1}
+format-muted-prefix-background = ${colors.transparent}
+
+format-muted-suffix = ""
+format-muted-suffix-font = 2
+format-muted-suffix-foreground = ${colors.surface1}
+format-muted-suffix-background = ${colors.transparent}
+
+label-muted = "MUTED "
+label-muted-background = ${colors.surface1}
+label-muted-foreground = ${colors.subtext0}
+
+[module/battery]
+type = internal/battery
+full-at = 99
+low-at = 20
+battery = BAT1
+adapter = ADP1
+poll-interval = 5
+
+format-charging = <label-charging>
+format-charging-prefix = ""
+format-charging-prefix-font = 2
+format-charging-prefix-foreground = ${colors.green}
+format-charging-prefix-background = ${colors.transparent}
+
+format-charging-suffix = ""
+format-charging-suffix-font = 2
+format-charging-suffix-foreground = ${colors.green}
+format-charging-suffix-background = ${colors.transparent}
+
+label-charging = "%percentage%% "
+label-charging-background = ${colors.green}
+label-charging-foreground = ${colors.crust}
+
+format-discharging = <label-discharging>
+format-discharging-prefix = ""
+format-discharging-prefix-font = 2
+format-discharging-prefix-foreground = ${colors.green}
+format-discharging-prefix-background = ${colors.transparent}
+
+format-discharging-suffix = ""
+format-discharging-suffix-font = 2
+format-discharging-suffix-foreground = ${colors.green}
+format-discharging-suffix-background = ${colors.transparent}
+
+label-discharging = "%percentage%% "
+label-discharging-background = ${colors.green}
+label-discharging-foreground = ${colors.crust}
+
+format-full = <label-full>
+format-full-prefix = ""
+format-full-prefix-font = 2
+format-full-prefix-foreground = ${colors.green}
+format-full-prefix-background = ${colors.transparent}
+
+format-full-suffix = ""
+format-full-suffix-font = 2
+format-full-suffix-foreground = ${colors.green}
+format-full-suffix-background = ${colors.transparent}
+
+label-full = "100% "
+label-full-background = ${colors.green}
+label-full-foreground = ${colors.crust}
+
+[module/date]
+type = internal/date
+interval = 1
+time = "%a %d %I:%M %P"
+; Adding some padding so it doesn't bump directly against the edge
+label = "  %time%  "
+label-foreground = ${colors.text}
+label-background = ${colors.transparent}
+
+[settings]
+screenchange-reload = true
+pseudo-transparency = true

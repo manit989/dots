@@ -1,0 +1,87 @@
+* {
+    border: none;
+    font-family: "JetBrainsMono Nerd Font Propo", monospace;
+    font-size: 13px;
+    font-weight: 700;
+    min-height: 0;
+    margin: 0;
+    padding: 0;
+}
+
+window#waybar {
+    background: rgba(24, 24, 37, 0.85); /* Dark, semi-transparent background */
+    color: #bac2de;
+}
+
+/* Tooltips */
+tooltip {
+    background: rgba(30, 30, 46, 0.9);
+    border: 1px solid #45475a;
+}
+tooltip label {
+    color: #bac2de;
+}
+
+/* Base padding for all visible modules */
+#custom-prompt,
+#workspaces,
+#custom-layout,
+#window,
+#custom-kernel,
+#cpu,
+#memory,
+#disk,
+#pulseaudio,
+#clock,
+#battery,
+#network,
+#custom-sep {
+    padding: 0 6px;
+}
+
+/* Dimmed Separator */
+#custom-sep {
+    color: #45475a; 
+}
+
+/* --- Left Side --- */
+#custom-prompt {
+    color: #bac2de;
+    padding-left: 14px;
+}
+
+#workspaces button {
+    color: #585b70; /* Inactive workspace color */
+    background: transparent;
+    padding: 0 4px;
+    margin: 0 2px;
+    border-bottom: 2px solid transparent; /* Prep for active underline */
+    border-radius: 0;
+    transition: all 0.2s ease;
+}
+
+#workspaces button:hover {
+    background: transparent;
+    color: #bac2de;
+}
+
+#workspaces button.focused {
+    color: #94e2d5; /* Active text color (Teal) */
+    border-bottom: 2px solid #cba6f7; /* Active underline color (Purple) */
+}
+
+#custom-layout, #window {
+    color: #bac2de;
+}
+
+/* --- Right Side Colors --- */
+#custom-kernel { color: #f5c2e7; } /* Pink */
+#cpu           { color: #f9e2af; } /* Yellow */
+#memory        { color: #94e2d5; } /* Teal */
+#disk          { color: #89b4fa; } /* Blue */
+#pulseaudio    { color: #b4befe; } /* Lavender */
+#clock         { color: #94e2d5; padding-right: 14px;} /* Teal */
+
+/* Extras */
+#battery       { color: #a6e3a1; } /* Green */
+#network       { color: #89b4fa; } /* Blue */

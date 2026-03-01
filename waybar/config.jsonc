@@ -1,0 +1,102 @@
+{
+    "layer": "top",
+    "position": "top",
+    "height": 32,
+    "spacing": 0,
+    "modules-left": [
+        "custom/prompt",
+        "sway/workspaces",
+        "custom/sep",
+        "custom/layout",
+        "custom/sep",
+        "sway/window"
+    ],
+    "modules-center": [],
+    "modules-right": [
+        "custom/kernel",
+        "custom/sep",
+        "cpu",
+        "custom/sep",
+        "memory",
+        "custom/sep",
+        "disk",
+        "custom/sep",
+	"battery",
+        "custom/sep",
+        "pulseaudio",
+        "custom/sep",
+        "clock"
+        // Uncomment below if you want your battery and network back
+        // ,"custom/sep",
+        // "battery",
+        // "custom/sep",
+        // "network"
+    ],
+
+    /* --- LEFT MODULES --- */
+    "custom/prompt": {
+        "format": ">_"
+    },
+    "sway/workspaces": {
+        "disable-scroll": true,
+        "all-outputs": true,
+        "format": "{name}"
+    },
+    "custom/layout": {
+        "format": "Tiled",
+        "tooltip": false
+    },
+    "sway/window": {
+        "format": "{app_id}",
+        "max-length": 50
+    },
+
+    /* --- RIGHT MODULES --- */
+    "custom/kernel": {
+        "exec": "uname -r | cut -d '-' -f1",
+        "interval": "once",
+        "format": "{}"
+    },
+    "cpu": {
+        "format": "CPU: {usage}%",
+        "interval": 2
+    },
+    "memory": {
+        "format": "Mem: {}%",
+        "interval": 2
+    },
+    "disk": {
+        "format": "Disk: {percentage_used}%",
+        "interval": 60,
+        "path": "/"
+    },
+    "pulseaudio": {
+        "format": "Vol: {volume}%",
+        "format-muted": "Vol: Muted",
+        "scroll-step": 1,
+        "on-click": "pavucontrol",
+        "ignored-sinks": ["Easy Effects Sink"]
+    },
+    "clock": {
+        "format": "{:%a, %b %d - %H:%M}"
+    },
+
+    /* --- EXTRA MODULES (Formatted to match) --- */
+    "battery": {
+        "format": "Bat: {capacity}%",
+        "format-charging": "Chg: {capacity}%"
+    },
+    "network": {
+        "interface": "wlan0",
+        "format-wifi": "WiFi: {essid}",
+        "format-ethernet": "Eth: {ipaddr}/{cidr}",
+        "format-disconnected": "Offline",
+        "max-length": 50
+    },
+
+    /* --- SEPARATOR --- */
+    "custom/sep": {
+        "format": "|",
+        "tooltip": false
+    }
+}
